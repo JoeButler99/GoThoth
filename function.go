@@ -21,8 +21,8 @@ func BuildFunctionSet() FunctionSet {
 			{Name: "Subtract", Inputs: 2, RPNAction: RPNSubtract},
 			{Name: "Multiply", Inputs: 2, RPNAction: RPNMultiply},
 			{Name: "Divide", Inputs: 2, RPNAction: RPNDivide},
-			{Name: "Square", Inputs: 2, RPNAction: RPNSquare},
-			{Name: "PercentMe", Inputs: 2, RPNAction: RPNPercentMe},
+			{Name: "Square", Inputs: 1, RPNAction: RPNSquare},
+			{Name: "PercentMe", Inputs: 1, RPNAction: RPNPercentMe},
 			{Name: "AVG2", Inputs: 2, RPNAction: RPNAvgOf2},
 		},
 	}

@@ -8,7 +8,13 @@ import (
 func assert_stack_element(t *testing.T, rpnStack *[50]float64, element uint, expected float64) {
 	if rpnStack[element] != expected {
 		fmt.Printf("Expected %f got %f\n", expected, rpnStack[element])
-		t.Fail()
+		t.FailNow()
+	}
+}
+
+func assert_true(t *testing.T, test bool) {
+	if test == false {
+		t.FailNow()
 	}
 }
 
@@ -154,4 +160,28 @@ func TestRandFloats(t *testing.T) {
 		}
 	}
 	t.Logf("Tested %d rands", rand_tests)
+}
+
+func TestFitnessCases_LoadFile(t *testing.T) {
+	f := FitnessCases{}
+	f.LoadFile("fitness_cases/test_sine_x")
+
+	assert_true(t, f.ScalingEnabled == false)
+	assert_true(t, f.Terminals == 1)
+	assert_true(t, f.TotalCases == 63)
+	assert_true(t, f.NumVars == 1)
+	assert_true(t, f.NumConsts == 0)
+	assert_true(t, f.ConstLower == 0)
+	assert_true(t, f.ConstUpper == 0)
+	assert_true(t, f.TargetScore == 0)
+	assert_true(t, f.ScalingLower == 1)
+	assert_true(t, f.ScalingUpper == 1)
+	assert_true(t, len(f.Targets) == 63)
+	assert_true(t, len(f.Cases) == 63)
+	assert_true(t, len(f.Multipliers) == 63)
+	assert_true(t, f.Multipliers[0] == 1)
+	assert_true(t, f.Multipliers[1] == 1)
+	assert_true(t, len(f.Cases[0]) == 1)
+	assert_true(t, len(f.Cases[1]) == 1)
+
 }
