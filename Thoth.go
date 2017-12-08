@@ -1,7 +1,5 @@
 package Thoth
 
-
 func main() {
-
 
 }

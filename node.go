@@ -1,8 +1,7 @@
 package Thoth
 
-
 type Node struct {
-	Function *Function
+	Function   *Function
 	TerminalNo uint
 	IsTerminal bool
 }
