@@ -39,10 +39,11 @@ func RNG_iRand() int {
 	return 0
 }
 
-func RNG_iRand_max(max int) int {
-	return 0
+// TODO - Integer specific RNG per thread
+func RandPostiveIntUpTo(max int) int {
+	return rand.Intn(max)
 }
 
-func RNG_iRand_min_max(min int, max int) int {
-	return 0
+func RandPostiveIntBetween(min int, max int) int {
+	return rand.Intn(max - min) + min
 }

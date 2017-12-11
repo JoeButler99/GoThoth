@@ -162,6 +162,29 @@ func TestRandFloats(t *testing.T) {
 	t.Logf("Tested %d rands", rand_tests)
 }
 
+
+func TestRandPostiveInts(t *testing.T) {
+	test_pairs := [][2]int{
+		{1,4},
+		{0,2},
+		{0,1},
+		{-10,-5},
+		{-100,100},
+	}
+	rand_tests := 0
+	for _, pair := range test_pairs {
+		for i := 0; i < 50; i++ {
+			result := RandPostiveIntBetween(pair[0], pair[1])
+			rand_tests ++
+			if result < pair[0] || result > pair[1] {
+				t.Logf("result %d , min %d, max %d", result, pair[0], pair[1])
+				t.Fail()
+			}
+		}
+	}
+	t.Logf("Tested %d rands", rand_tests)
+}
+
 func TestFitnessCases_LoadFile(t *testing.T) {
 	f := FitnessCases{}
 	f.LoadFile("fitness_cases/test_sine_x")

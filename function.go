@@ -10,12 +10,16 @@ type Function struct {
 
 type FunctionSet struct {
 	Name         string
-	FunctionList []Function
+	SingleInputFunctionList, DoubleInputFunctionList, FunctionList []Function
+	SingleInputFunctionListSize, DoubleInputFunctionListSize, FunctionListSize int
 }
 
 func BuildFunctionSet() FunctionSet {
 	fs := FunctionSet{
 		Name: "Basic",
+
+		// TODO - Invesigate if there is a dynamic way to generate
+		// TODO   The later lists and ints
 		FunctionList: []Function{
 			{Name: "Add", Inputs: 2, RPNAction: RPNAdd},
 			{Name: "Subtract", Inputs: 2, RPNAction: RPNSubtract},
@@ -27,5 +31,34 @@ func BuildFunctionSet() FunctionSet {
 		},
 	}
 
+	for _ , f := range fs.FunctionList {
+		if f.Inputs == 1 {
+			fs.SingleInputFunctionList = append(fs.SingleInputFunctionList, f)
+		} else if f.Inputs == 2 {
+			fs.DoubleInputFunctionList = append(fs.DoubleInputFunctionList, f)
+		} else {
+			panic("Function with wrong number of inputs")
+		}
+	}
+
+	fs.FunctionListSize = len(fs.FunctionList)
+	fs.DoubleInputFunctionListSize = len(fs.DoubleInputFunctionList)
+	fs.SingleInputFunctionListSize = len(fs.SingleInputFunctionList)
 	return fs
+}
+
+
+
+func (f *FunctionSet) GiveRandFunction() Function {
+	return f.FunctionList[RandPostiveIntUpTo(f.FunctionListSize)]
+}
+
+func (f *FunctionSet) GiveRandFunctionWithSetInputSize(inputs int) Function {
+	if inputs == 1 {
+		return f.SingleInputFunctionList[RandPostiveIntUpTo(f.SingleInputFunctionListSize)]
+	} else if inputs == 2 {
+		return f.DoubleInputFunctionList[RandPostiveIntUpTo(f.DoubleInputFunctionListSize)]
+	} else {
+		panic("Request for function with wrong number of inputs")
+	}
 }
