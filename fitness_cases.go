@@ -13,7 +13,7 @@ type ConstantPool struct {
 }
 
 type FitnessCases struct {
-	TotalCases, Terminals, NumVars, NumConsts                       uint
+	TotalCases, Terminals, NumVars, NumConsts                       int
 	ConstLower, ConstUpper, TargetScore, ScalingLower, ScalingUpper float64
 	ScalingEnabled                                                  bool
 	Multipliers, Targets, CliCase                                   []float64
@@ -38,12 +38,12 @@ func (f *FitnessCases) LoadFile(inputFile string) {
 				panic("Bad Fitness case line 0")
 			}
 
-			tUint, err := strconv.ParseUint(bits[0], 10, 32)
+			t, err := strconv.ParseInt(bits[0], 10, 32)
 			check_err(err)
-			f.NumVars = uint(tUint)
-			tUint, err = strconv.ParseUint(bits[1], 10, 32)
+			f.NumVars = int(t)
+			t, err = strconv.ParseInt(bits[1], 10, 32)
 			check_err(err)
-			f.NumConsts = uint(tUint)
+			f.NumConsts = int(t)
 			f.ConstLower, err = strconv.ParseFloat(bits[2], 64)
 			check_err(err)
 			f.ConstUpper, err = strconv.ParseFloat(bits[3], 64)
@@ -57,9 +57,9 @@ func (f *FitnessCases) LoadFile(inputFile string) {
 			}
 			f.TargetScore, err = strconv.ParseFloat(bits[0], 64)
 			check_err(err)
-			tUint, err := strconv.ParseUint(bits[1], 10, 64)
+			t, err := strconv.ParseInt(bits[1], 10, 32)
 			check_err(err)
-			f.TotalCases = uint(tUint)
+			f.TotalCases = int(t)
 			f.ScalingLower, err = strconv.ParseFloat(bits[2], 64)
 			check_err(err)
 			f.ScalingUpper, err = strconv.ParseFloat(bits[3], 64)

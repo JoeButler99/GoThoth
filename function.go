@@ -4,7 +4,7 @@ package Thoth
 
 type Function struct {
 	Name      string
-	Inputs    uint
+	Inputs    int
 	RPNAction RPNAction
 }
 

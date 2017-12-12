@@ -32,7 +32,7 @@ func TestRPNAdd(t *testing.T) {
 	var stack = [50]float64{}
 	stack[0] = 2
 	stack[1] = 7
-	var highest uint = 2
+	highest := 2
 	RPNAdd(&stack, &highest)
 	if stack[0] != 9 {
 		t.Fail()
@@ -43,7 +43,7 @@ func TestRPNSubtract(t *testing.T) {
 	var stack = [50]float64{}
 	stack[0] = 2
 	stack[1] = 7
-	var highest uint = 2
+	highest := 2
 	RPNSubtract(&stack, &highest)
 	assert_stack_element(t, &stack, 0, 5)
 
@@ -53,7 +53,7 @@ func TestRPNMultiply(t *testing.T) {
 	var stack = [50]float64{}
 	stack[0] = 2
 	stack[1] = 7
-	var highest uint = 2
+	highest := 2
 	RPNMultiply(&stack, &highest)
 	assert_stack_element(t, &stack, 0, 14)
 
@@ -62,7 +62,7 @@ func TestRPNMultiply(t *testing.T) {
 func TestRPNSquare(t *testing.T) {
 	var stack = [50]float64{}
 	stack[0] = 4
-	var highest uint = 1
+	highest := 1
 	RPNSquare(&stack, &highest)
 	assert_stack_element(t, &stack, 0, 16)
 }
@@ -71,7 +71,7 @@ func TestPRNDivide(t *testing.T) {
 	var stack = [50]float64{}
 	stack[0] = 4
 	stack[1] = 8
-	var highest uint = 2
+	highest := 2
 	RPNDivide(&stack, &highest)
 	assert_stack_element(t, &stack, 0, 2)
 
@@ -86,7 +86,7 @@ func TestPRNDivide(t *testing.T) {
 func TestRPNPercentMe(t *testing.T) {
 	var stack = [50]float64{}
 	stack[0] = 50
-	var highest uint = 1
+	highest := 1
 	RPNPercentMe(&stack, &highest)
 	assert_stack_element(t, &stack, 0, 0.5)
 }
@@ -95,7 +95,7 @@ func TestRPNAvgOf2(t *testing.T) {
 	var stack = [50]float64{}
 	stack[0] = 50
 	stack[1] = 10
-	var highest uint = 2
+	highest := 2
 	RPNAvgOf2(&stack, &highest)
 	assert_stack_element(t, &stack, 0, 30)
 
@@ -109,7 +109,7 @@ func TestFunction(t *testing.T) {
 	}
 
 	var stack = [50]float64{}
-	var highest uint = 2
+	highest := 2
 	stack[0] = 1
 	stack[1] = 2
 	f.RPNAction(&stack, &highest)
@@ -248,7 +248,7 @@ func TestFunctionSet_GiveRandFunctionWithSetInputSize(t *testing.T) {
 			inputs = 2
 		}
 		result := fs.GiveRandFunctionWithSetInputSize(inputs)
-		assert_true(t, result.Inputs == uint(inputs))
+		assert_true(t, result.Inputs == inputs)
 		if _, ok := functionCounts[result.Name]; ok {
 			functionCounts[result.Name]++
 		} else {
@@ -267,7 +267,7 @@ func setupNodeToTestAction(t *testing.T, action string, p *PopulationMember, fs 
 	p.Nodes = append(p.Nodes, Node{IsTerminal: false, Function: fs.GiveFunctionByName(action)})
 	assert_true(t, len(p.Nodes) == 1)
 	for i := 0; i < int(fs.GiveFunctionByName(action).Inputs); i++ {
-		p.Nodes = append(p.Nodes, Node{TerminalNo: uint(i), IsTerminal: true})
+		p.Nodes = append(p.Nodes, Node{TerminalNo: i, IsTerminal: true})
 	}
 }
 

@@ -2,7 +2,7 @@ package Thoth
 
 type Node struct {
 	Function   *Function
-	TerminalNo uint
+	TerminalNo int
 	IsTerminal bool
 }
 
@@ -15,7 +15,7 @@ type PopulationMember struct {
 
 func (p *PopulationMember) SolveSelf(var_set *[]float64) float64 {
 	var rpnStack = [50]float64{}
-	highest := uint(0)
+	highest := int(0)
 	vs := *var_set
 
 	for x := len(p.Nodes) - 1; x > -1; x-- {
@@ -33,7 +33,7 @@ func (p *PopulationMember) SolveSelf(var_set *[]float64) float64 {
 
 func (p *PopulationMember) FillRandomNodes(maxDepth int, fitnessCases *FitnessCases, functionSet *FunctionSet) {
 	if maxDepth == 0 || (p.CreationMethod == "grow" && RandPostiveIntUpTo(20)%5 == 0) {
-		p.Nodes = append(p.Nodes, Node{IsTerminal: true, TerminalNo: uint(RandPostiveIntUpTo(int(fitnessCases.Terminals)))})
+		p.Nodes = append(p.Nodes, Node{IsTerminal: true, TerminalNo: RandPostiveIntUpTo(fitnessCases.Terminals)})
 	} else {
 		n := Node{Function: functionSet.GiveRandFunction()}
 		p.Nodes = append(p.Nodes, n)
