@@ -31,4 +31,19 @@ func (p *PopulationMember) SolveSelf(var_set *[]float64) float64 {
 	return rpnStack[0]
 }
 
-//func (p *PopulationMember) FillRandomNodes
+func (p *PopulationMember) FillRandomNodes(maxDepth int, fitnessCases *FitnessCases, functionSet *FunctionSet) {
+	if maxDepth == 0 || (p.CreationMethod == "grow" && RandPostiveIntUpTo(20)%5 == 0) {
+		p.Nodes = append(p.Nodes, Node{IsTerminal: true, TerminalNo: uint(RandPostiveIntUpTo(int(fitnessCases.Terminals)))})
+	} else {
+		n := Node{Function: functionSet.GiveRandFunction()}
+		p.Nodes = append(p.Nodes, n)
+		for x := 0; x < int(n.Function.Inputs); x++ {
+			p.FillRandomNodes(maxDepth-1, fitnessCases, functionSet)
+		}
+	}
+}
+
+// TODO - This function
+//func (p *PopulationMember) DisplaySelf() {
+//
+//}

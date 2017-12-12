@@ -312,3 +312,14 @@ func TestPopulationMember_SolveSelf(t *testing.T) {
 	assert_floats_equal(t, p.SolveSelf(&test_vars), 1.5)
 
 }
+
+func TestPopulationMember_FillRandomNodes(t *testing.T) {
+	fs := BuildFunctionSet()
+	p := PopulationMember{}
+	fc := FitnessCases{}
+	fc.LoadFile("fitness_cases/test_sine_x")
+
+	p.FillRandomNodes(3, &fc, &fs)
+	assert_true(t, len(p.Nodes) >= 3)
+
+}

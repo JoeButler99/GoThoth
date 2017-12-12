@@ -47,15 +47,15 @@ func BuildFunctionSet() FunctionSet {
 	return fs
 }
 
-func (f *FunctionSet) GiveRandFunction() Function {
-	return f.FunctionList[RandPostiveIntUpTo(f.FunctionListSize)]
+func (f *FunctionSet) GiveRandFunction() *Function {
+	return &f.FunctionList[RandPostiveIntUpTo(f.FunctionListSize)]
 }
 
-func (f *FunctionSet) GiveRandFunctionWithSetInputSize(inputs int) Function {
+func (f *FunctionSet) GiveRandFunctionWithSetInputSize(inputs int) *Function {
 	if inputs == 1 {
-		return f.SingleInputFunctionList[RandPostiveIntUpTo(f.SingleInputFunctionListSize)]
+		return &f.SingleInputFunctionList[RandPostiveIntUpTo(f.SingleInputFunctionListSize)]
 	} else if inputs == 2 {
-		return f.DoubleInputFunctionList[RandPostiveIntUpTo(f.DoubleInputFunctionListSize)]
+		return &f.DoubleInputFunctionList[RandPostiveIntUpTo(f.DoubleInputFunctionListSize)]
 	} else {
 		panic("Request for function with wrong number of inputs")
 	}
