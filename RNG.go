@@ -45,5 +45,5 @@ func RandPostiveIntUpTo(max int) int {
 }
 
 func RandPostiveIntBetween(min int, max int) int {
-	return rand.Intn(max - min) + min
+	return rand.Intn(max-min) + min
 }

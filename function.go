@@ -9,8 +9,8 @@ type Function struct {
 }
 
 type FunctionSet struct {
-	Name         string
-	SingleInputFunctionList, DoubleInputFunctionList, FunctionList []Function
+	Name                                                                       string
+	SingleInputFunctionList, DoubleInputFunctionList, FunctionList             []Function
 	SingleInputFunctionListSize, DoubleInputFunctionListSize, FunctionListSize int
 }
 
@@ -31,7 +31,7 @@ func BuildFunctionSet() FunctionSet {
 		},
 	}
 
-	for _ , f := range fs.FunctionList {
+	for _, f := range fs.FunctionList {
 		if f.Inputs == 1 {
 			fs.SingleInputFunctionList = append(fs.SingleInputFunctionList, f)
 		} else if f.Inputs == 2 {
@@ -47,8 +47,6 @@ func BuildFunctionSet() FunctionSet {
 	return fs
 }
 
-
-
 func (f *FunctionSet) GiveRandFunction() Function {
 	return f.FunctionList[RandPostiveIntUpTo(f.FunctionListSize)]
 }
@@ -61,4 +59,14 @@ func (f *FunctionSet) GiveRandFunctionWithSetInputSize(inputs int) Function {
 	} else {
 		panic("Request for function with wrong number of inputs")
 	}
+}
+
+func (f *FunctionSet) GiveFunctionByName(name string) *Function {
+	// Initiall created for testing.
+	for _, function := range f.FunctionList {
+		if function.Name == name {
+			return &function
+		}
+	}
+	panic("Could not find function")
 }
